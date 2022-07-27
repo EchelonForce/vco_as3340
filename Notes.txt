@@ -1,0 +1,6 @@
+Issues on v1
+ - When making the front panel drawings I noticed the fine tune pot and PWM pot are not equally spaced from the center line. Also the jacks centers are not equidistant from the sides making front panel layout awkward. I made the whole PCB off center relative to the front panel to mitigate this.
+
+
+Sim of virtual ground summing node on CVs
+https://tinyurl.com/29nqo2se
