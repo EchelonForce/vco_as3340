@@ -29,7 +29,6 @@ fp-info-cache
 *.csv
 /*/outputs/
 /*/panelized_outputs/
-*.pdf
 *.pyc
 *.fcstd1
 *.FCStd1
@@ -37,4 +36,3 @@ fp-info-cache
 *.FCStd2
 Private
 /vco_as3340_v1/#auto_saved_files#
-*.png
