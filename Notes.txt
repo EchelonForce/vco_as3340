@@ -1,6 +1,96 @@
 Issues on v1
  - When making the front panel drawings I noticed the fine tune pot and PWM pot are not equally spaced from the center line. Also the jacks centers are not equidistant from the sides making front panel layout awkward. I made the whole PCB off center relative to the front panel to mitigate this.
 
+ - Fought the output of the pulse wave a lot. There was a lot of ringing on the falling edge. I found some info online https://lookmumnocomputer.discourse.group/t/glitches-or-ringing-on-the-pulse-output-of-the-as3340-and-cem3340/752/5
+that suggests using a 10M between the PWM an Pulse pins. I tried that and a few other values but still had issues. I also tried a few small cap values trying to filter the pulse output. Eventually I probed the -5V supply at the chip and found significant ripple in that supply. When I removed the chip (no load) the ripple went away, so I patched in more capacitance at the JP3 jumper (10uF polarized) and that cleaned up the wave considerably. There was still some ring in the pulse output after the buffer that wasn't there pre-buffer (see notes later about scope probe). I removed R6 to help with that. R6 was meant to be a pulldown for the buffer input that I've used in other designs but here it interfered with the R7/R8 voltage divider causing lower than expected output.
+
+- After building 4 of these (intending to test different caps) I have had issues with tuning accross all of them so I pulled them out of the rack and started debugging that. First I started by retrimming everything. I suspect I was impatient after building them because all of them needed adjustment. I powered them all on togeth and let them sit about an hour and then trimmed RZ_TEMP1 again and waited another half hour or so. Then went about the tuning by shorting JP4 and tuning to C6. I found while doing this that tuning one vco against another was easier than tuning to 1046.5 on my scope. The wave forms slide in and out of phase visually on screen and I can get them very close by bringing the slide to a stop but it's fiddely, they never really stop for long. I finished with unshorting and refinding C6 with the 5V CV and C1 with the 0V CV (again tuning with visually helped).
+
+- After all that I let the run for a while and came back to check the pulse wave again and on one it was pretty ringy on the falling edge but only below 5V CV... so I googled again and found this thread
+https://modwiggler.com/forum/viewtopic.php?t=231130
+That led me to retry a 10M 'hysteresis' resistance between pins 4 and 5, which again didn't work. Strangely if I probed from pin 4 directly the output would be quite a bit better, but a pretty long flank on the falling edge, I guess the scope probe impedance/capacitance was effecting it a lot...On the same thread others mentioned a pull down cap on pin 4 and this improved things significantly. I landed on 100pF after trying large and smaller common values. Unlike the smoothing cap added to the -5V rail earlier, I don't have a nice place to rework this cap to the boards. 
+
+So now there's finally a pretty clean pulse across the 0V-10V range
+
+Current state: 2022-08-23 - See phone photo
+ - R10 is 47k
+ - 100pF across R10
+ - R9 short
+ - JP3 10uF polarized cap from -5 to -12 rail. 
+ - JP2 short
+ - R5 short
+ - R6 DNU
+ - JP1 short
+ - Unit 1 & 2 - red caps
+ - Unit 3 - white cap
+ - Unit 4 - poly cap
+ - R21 & R23 are 5.1k
+ - RZ1 18k not 13k
+
+Some other things to investigate.
+ - try running on batteries to see if it cleans up frequency meandering? measure first.
+ - buy and try higher precision resistors R30, R2,
+ - I haven't messed with high freq. track at all yet.
+ - Need to do more thorough look at tracking in general from 0-10V.
+ - Fine tune knob has a little too much influence on tune, several semi tones... reduce?
+   - Increase R3 or reduce range of RFINE_TUNE1
+ - Try 5.6k on R21,R23 to reduce component count.
+
+2022-08-28 - Testing Notes
+Did a bunch of testing with the frequency counter. 
+Completely retuned all four DUTs with frequency counter and mV scale for temp adjust step 1.
+The tracking from 0v to 5V looked pretty good using a bench supply for CV and multimeter with mV accuracy. Frequency counter struggled a bit at some frequencies, compared against oscilliscope at lower frequencies.
+  Procedure was:
+   Powered on for 1hr or more to warm up.
+   Readjusted temp1 w/ mV range on multimeter, drifts a bit, got it under a mV.
+   Short J4 and get 1046.5 with ref pitch.
+   Set Fine Tune knob to center.
+   Set Freq knob to 0, full CCW.
+   Input CV 5.000V+-0.001
+   Use Refind C6 to get 1046.5, this was trickier than with F4 shorted.
+   Input CV 0.000V+-0.001
+   Use scale adjust to get 32.70+/-0.01 Hz 
+   Checked tracking.
+
+ V    Unit   
+        1      2       3        4    Ideal
+0V    32.7    32.7    32.7    32.7   32.7
+1V    65.45   64.9    66.0    66.0   65.41
+2V   130.9   130.2   130.7   130.6   130.81
+3V   261.9   260.8   261.8   261.4   261.63
+4V   523.3   521.6   523.4   522.5   523.25
+5V   1047    1045    1049    1046    1046.5
+
+So nearly all within a 1Hz of ideal. 
+
+At this point I checked the weird result the tuner gives me at 1046 with a signal from the frequency gen. I was weird there too and I will investigate that later.
+
+Then I went into trying the DUTs with the midi cv. Unfortunately that also has and issue so the impedance of the oscillators effect it's output. Details in that other note sheet...ugh. 
+
+After some fiddling with the midicv, I thought I had it generating accurate voltages. Unfortunately because the oscillators were tuned with a strong voltage source they didn't behave. All of them need to be offset with the knob :( I want to avoid that, but I guess I have to tune them with the midi source instead??? Kind of confused about this. They seem to work okay with manual tune.
+
+Maybe I just need to redo the circuit and accept the harder tuning method...or maybe is psu voltage differences.
+Starting to think a digital oscillator would be so much easier.
+
+2022-09-04
+Did some more rigid testing of the AI011 and DUT2. See testing folder notes. 
+
+
+
+
+
+
+
+
+
+Changes for v2
+ - unfinished!
+ - R26 change 200k to two 100k
+ - add optional R between PWM and pulse output for hysteresis above.
+ - 
 
 Sim of virtual ground summing node on CVs
 https://tinyurl.com/29nqo2se
+
+
+https://www.eddybergman.com/2020/01/synthesizer-build-part-18-really-good.html

@@ -1,0 +1,64 @@
+data was collected from a rigol dg1062 which seems to not be very robust for screen shots so there are duplicate files on disk?! 
+whatever. 
+most of the data is there and I used a paper record from a Trio FC756 too:
+
+
+AI011 - Wanted to compared to another design.
+    trio freq    CV     freq_rigol
+0        999   4.999     998.8
+1       1001            1000.3
+2       1001            1000.7
+3       1000            1000.9
+4       1001   4.996    1001.2        - 
+5       1001            1001.0
+6       1001            1000.9
+7       1001            1000.7
+8       1000            1000.7?duplicate
+9       1001   4.955    1000.4
+10      1001            1000.4 stdev after stabilized is ~150mHz
+
+DUT#2
+    trio freq    CV     freq_rigol
+0       998     4.994    999.0
+1      1000     4.993   1000.3
+2      1001     4.993   1000.6
+3      1001     4.993   1001.0
+4      1001     4.993   1001.2
+5      1002     4.992   1001.4
+6      1001     4.992   1001.2
+7      1001     4.992   1001.4
+8      1002     4.992   1001.5
+9      1002     4.992   1001.6
+10     1001     4.992   1001.5
+11     1002     4.991   1001.5
+12     1002     4.991   1001.5
+13     1001     4.991   1001.3 stdev after stabilized is ~70mHz       
+
+Because the CV was falling this might be a little skewed because that would counter the drift upward.
+So bloody hard to test this.
+
+While I had DUT2 warmed up, I also measured the frequency drift against the PWM, for this I just read the duty and freq off the rigol. The trio struggled at the lowest duty.
+
+PWM Duty +/-1%   Frequency +/-0.1Hz
+~ 1%             1009.5
+  5%             1009.2
+ 10%             1008.8
+ 15%             1008.4
+ 25%             1007.9
+ 30%             1007.3
+ 35%             1006.7
+ 40%             1006.3
+ 45%             1005.9
+ 50%             1005.3
+ 55%             1004.6
+ 60%             1004.3
+ 65%             1003.7
+ 70%             1003.3
+ 75%             1002.6
+ 80%             1002.2
+ 85%             1001.5
+ 90%             1000.9
+ 95%             1000.3
+~98%              999.6 - The falling edge prevents any larger duty.
+
+So there's 10hz drift (~1%) over the range of the pwm input.
