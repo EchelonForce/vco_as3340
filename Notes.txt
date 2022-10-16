@@ -78,19 +78,26 @@ Did some more rigid testing of the AI011 and DUT2. See testing folder notes.
 
 
 
+Schematic Changes v1 to v2:
+ - R10 = 47k
+ - R9 = 0ohm 
+ - New C1 100pF across R10 and R9
+ - New C15 10uF polarized cap from -5 to GND. 
+ - R6 DNU
+ - R21 & R23 changed to 5.1k 
+ - RZ1 changed to 18k
+ - R26 changed to 100k and new R31 is 100k.
+ - New  R32 for 'hysteresis' between PWM and Pulse.
+ - Separated grounds on Linear FM and Scale Adj. Circuits for clarity.
+ - Added another TL072 (U6) and supporting circuits.
+    - This is intended to supply two reference voltages from the 5V source.
+    - The idea is to provide Soft Sync (pin 9) with a stable voltage of 1/3*Supply, which is something like 11.3/3.
+    - The other REF_PITCH2 is for the Linear FM circuit. Some resistors probably aren't right for this yet, and I think it can completely replace REF_PITCH pot so I've placed a jumper there to allow either if it doesn't work out.
 
-
-
-
-
-Changes for v2
- - unfinished!
- - R26 change 200k to two 100k
- - add optional R between PWM and pulse output for hysteresis above.
- - 
+Other 
+ - During assembly, short J1 and J2
 
 Sim of virtual ground summing node on CVs
 https://tinyurl.com/29nqo2se
-
 
 https://www.eddybergman.com/2020/01/synthesizer-build-part-18-really-good.html
