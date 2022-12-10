@@ -2743,9 +2743,6 @@
     (path "/6720da0c-fa95-44ea-9182-a5bf2ee7afa3"
       (reference "#PWR010") (unit 1) (value "GND") (footprint "")
     )
-    (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/f9bcb067-066c-4817-b1cd-ebb202abb507"
-      (reference "#PWR011") (unit 1) (value "+12V") (footprint "")
-    )
     (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/7c6bc3c2-7689-4dff-a10c-172f43a2147d"
       (reference "#PWR012") (unit 1) (value "+12V") (footprint "")
     )
@@ -2830,9 +2827,6 @@
     (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/2ba1c888-18e0-4ab1-b98c-b3b2f71405da"
       (reference "#PWR042") (unit 1) (value "+5V") (footprint "")
     )
-    (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/959be010-b499-4637-9a69-e30a6461974e"
-      (reference "#PWR043") (unit 1) (value "GND") (footprint "")
-    )
     (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/ad81097e-d09a-4251-938e-94625f02348f"
       (reference "#PWR044") (unit 1) (value "GND") (footprint "")
     )
@@ -2904,6 +2898,9 @@
     )
     (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/1b4cd22b-58da-4136-8208-a4094c4809bb"
       (reference "#PWR0116") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/53cc270a-f531-4c6a-9f59-a1671b3d4c77"
+      (reference "#PWR0117") (unit 1) (value "GND") (footprint "")
     )
     (path "/271a057e-81fd-43e1-b800-461632f55a88"
       (reference "#PWR0122") (unit 1) (value "-12V") (footprint "")
@@ -3001,6 +2998,9 @@
     (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/979a7fc9-5390-4481-91dd-b28e8acee244"
       (reference "HF_TRACK1") (unit 1) (value "10k") (footprint "Potentiometer_THT:Potentiometer_Bourns_3296W_Vertical")
     )
+    (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/10809291-c158-471e-911c-4036f1ea4b32"
+      (reference "J1") (unit 1) (value "FREQ_CV2") (footprint "My Stuff:Jack_3.5mm_MJ-355W_Vertical")
+    )
     (path "/221844f7-d141-4d22-8ed6-e33f34d496de"
       (reference "J2") (unit 1) (value "Conn_02x05_Odd_Even") (footprint "Connector_IDC:IDC-Header_2x05_P2.54mm_Vertical")
     )
@@ -3025,9 +3025,6 @@
     (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/7c6d6c88-eaa5-409e-9b45-6f9d1bee5eb5"
       (reference "JP5") (unit 1) (value "Jumper_2_Bridged") (footprint "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm")
     )
-    (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/3ef48d1c-accd-4da8-bb1a-f2f1cc4d922a"
-      (reference "JP6") (unit 1) (value "Jumper_3_Bridged12") (footprint "Jumper:SolderJumper-3_P1.3mm_Bridged12_Pad1.0x1.5mm")
-    )
     (path "/fb718fde-b64d-4cc3-b404-7e5f0c9c36ea"
       (reference "LOGO1") (unit 1) (value "logo1") (footprint "My Stuff:Logo1")
     )
@@ -3046,8 +3043,11 @@
     (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/4378a121-77a3-4a57-893a-b6eeddcf7336"
       (reference "R3") (unit 1) (value "1.5M") (footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder")
     )
-    (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/eef44039-056f-4e6c-873c-b51899306082"
-      (reference "R4") (unit 1) (value "22k") (footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder")
+    (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/8630816b-32c3-4d8f-ba90-b1bc3f43155e"
+      (reference "R4") (unit 1) (value "0") (footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder")
+    )
+    (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/45a79bb9-31ad-401e-a9c1-6b939b893e15"
+      (reference "R5") (unit 1) (value "100k,0.05%") (footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder")
     )
     (path "/23b8c23a-2853-40c3-a53a-30fd914fa018/f2e2b478-956f-41ff-a344-08d81a517396"
       (reference "R6") (unit 1) (value "DNU") (footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder")
@@ -3154,11 +3154,8 @@
     (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/8541f415-d857-46af-8297-da10a5f2c05b"
       (reference "REFIND_C6") (unit 1) (value "100k") (footprint "Potentiometer_THT:Potentiometer_Bourns_3296W_Vertical")
     )
-    (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/5285fecf-e4f6-4406-9ca3-153a0e6edd3a"
-      (reference "REF_PITCH1") (unit 1) (value "10k") (footprint "Potentiometer_THT:Potentiometer_Bourns_3296W_Vertical")
-    )
     (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/4d42fbcd-a502-494a-8b1e-dcff71f15b0e"
-      (reference "REF_PITCH2") (unit 1) (value "100k") (footprint "Potentiometer_THT:Potentiometer_Bourns_3296W_Vertical")
+      (reference "REF_PITCH1") (unit 1) (value "100k") (footprint "Potentiometer_THT:Potentiometer_Bourns_3296W_Vertical")
     )
     (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/5ccd53de-7a99-4fe4-900c-6696a963ddf1"
       (reference "REF_VOLT_1") (unit 1) (value "100k") (footprint "Potentiometer_THT:Potentiometer_Bourns_3296W_Vertical")
@@ -3212,7 +3209,7 @@
       (reference "TP3") (unit 1) (value "REF_VOLT_1") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical")
     )
     (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/e6f8942e-84ec-400d-aad2-76b2434103e0"
-      (reference "TP4") (unit 1) (value "REF_VOLT_2") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical")
+      (reference "TP4") (unit 1) (value "REF_PITCH_1") (footprint "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical")
     )
     (path "/95d1bf8a-86c3-4127-b39f-a83020e3ac99"
       (reference "U1") (unit 1) (value "LM7805_TO220") (footprint "Package_TO_SOT_THT:TO-220-3_Vertical")

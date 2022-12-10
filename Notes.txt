@@ -92,10 +92,10 @@ Schematic Changes v1 to v2:
  - Added another TL072 (U6) and supporting circuits.
     - This is intended to supply two reference voltages from the 5V source.
     - The idea is to provide Soft Sync (pin 9) with a stable voltage of 1/3*Supply, which is something like 11.3/3.
-    - The other REF_PITCH2 is for the Linear FM circuit. Some resistors probably aren't right for this yet, and I think it can completely replace REF_PITCH pot so I've placed a jumper there to allow either if it doesn't work out.
-  switched to a tl074
-  removed jp1,2,3 and extra vee stuff, just going to use -5V ref.
-
+    - The other REF_PITCH1 is for the Linear FM circuit. Some resistors probably aren't right for this yet, replaced original ref_pitch with this.
+  Moved outputs to a tl074 to save some space.
+  Removed jp1,2,3 and extra vee stuff, just going to use -5V ref.
+  Added second frequency CV jack.
 
 Other 
  - During assembly, short J1 and J2
