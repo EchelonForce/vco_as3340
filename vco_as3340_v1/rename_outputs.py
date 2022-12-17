@@ -31,8 +31,9 @@ def rename(folder, input_name, output_name):
         ("-F_SilkScreen.gbr", ".GTO"),
         (".drl", ".TXT"),
     ]
-
-    os.mkdir(folder + "\\seeed_fusion\\")
+    
+    if not os.path.exists(folder + "\\seeed_fusion\\"):
+      os.mkdir(folder + "\\seeed_fusion\\")
     for a in extensions:
         (in_ext, out_ext) = a
 
@@ -48,7 +49,7 @@ def rename(folder, input_name, output_name):
             myzip.write(output_name + out_ext)
 
 folder = ".\panelized_outputs"
-input_name = "vco_as3340_v1_panelized"
-output_name = "vco_as3340_v1_panelized"
+input_name = "vco_as3340_v2_panelized"
+output_name = "vco_as3340_v2_panelized"
 
 rename(folder, input_name, output_name)
