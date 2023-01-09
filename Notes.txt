@@ -104,3 +104,85 @@ Sim of virtual ground summing node on CVs
 https://tinyurl.com/29nqo2se
 
 https://www.eddybergman.com/2020/01/synthesizer-build-part-18-really-good.html
+
+
+
+
+
+---------------------------------------------------------------------------------
+Issues on v2 PCB:
+ - VEE net isn't connected to -5V so the scale adjust circuit isn't powered. Rework short from C10 to RT1.
+ - 10pF cap needed on Sawtooth first stage opamp. There was ring in this on the falling edge and this cap helped. (between U4's pins 8/9)
+ - Rr1 was changed to 220k from 330k.
+ - R4, R33 and R34 should be 100k.
+ - C19 should be DNU, it caused oscillation on REF_VOLT_1.
+ - Add 10pF on U4B (between pins 6/7) for rising edge of pulse.
+ - Add resistors for PWM pot so it's range is limited. (also do fine tune if there's room).
+ - Add cal frequencies on silkscreen if there's room.
+ - Change supply into REFIND_C6, from 12V to REF_PITCH_1.
+ - Change R21 to 10k
+ - Change R23 to 0Ohm
+ - Change R8 to 110k, lowers pulse out peak to peak.
+ 
+Issues on v2 Front Panel
+ - Tried to have holes for the trim pots that are technically on the back of the PCB so they could be mounted on the front, but the holes in the panel are oriented for when the pots are on the back. Need to move them.
+ - Trim pot holes could be smaller.
+ - Saw wave has rising edge, but it should be falling (rising slope).
+
+Test Notes 2022-12-26:
+ - Assembled 2 PCBs.
+ - Checked voltage rails +/- 12V, +/- 5V
+ - Before adding the AS3340, set the REF_VOLT_1 to 1/3 Vcc = 3.75V
+    - I checked REF_VOLT_1 with multimeter (TP3) but that hid the oscillations (almost full peak to peak). Eventually I figure that out with a scope and removed C19 and changed REF_VOLT_1 op-amp resistors for non-unity gain.
+ - Add the AS3340.
+ - Tried an output and there was no frequency change when the knobs were used...
+ - Tried cal step 1 (temp adjust) but the diff between TP1/2 was exactly 0.
+ - Debugged this until I figured out the missing VEE net to -5V connection. Fixed with short between C10 and RT1.
+ - Checked the other outputs. Sawtooth had bad ring in it the AS3340 output was clean, so I added a 10pF on the first stage opamp feedback which improved it considerably.
+ - Did Cal step 1, okay.
+ - During Cal step 2 I couldn't get C6 on the output, it was close, so I looked at the new REF_PITCH voltage reference, it was maxing out at ~10V from the opamp, since it can't go any higher I changed Rr1 from 330k to 220k and that was just enough head room. Might need even lower to allow lower input voltages.
+ - Checked Fine Tune range. Seems to be +/-2 semi-tones (at 5V on freq CV) which I think is okay.
+ - Measured the triangle wave symmetry with scope cursors. Seems perfect at 5V on freq CV. 
+
+Test Notes 2023-01-07:
+ - Checked PWM knob range. It goes to 100% Duty too early @ 3.9V. 
+  - Need to add a couple resistors inline with the pot to adjust it to the useful range.
+ - Recorded some frequency data while adjusting the Vcc from 11.9V up to 12.1V. 
+  - The frequency change (starting with 1000Hz at 12V) was 50Hz over the 0.2V range tested. 
+    - Also tested a v1.0PCB and the result was similar. This is about 25% per Volt.
+  - I think it's due to the REFIND_C6 supply voltage varying.
+ - Checked Square wave peak to peak, it's about 11V. And there's a bi of ring on the rising edge.
+  - Made R8 = 110k to lower the output closer to 10V.
+  - Added a 10pF cap on top of R27 to help the ring. (took photos).
+ - Tested the PWM effect on frequency with and without the R32 populated (2.2MOhm and open).
+  - No significant difference. Tested 5% increments at a 1000Hz starting point, in both cases, aout 6Hz change over full PWM range.
+
+Test Notes 2023-01-08:
+ - Tried to fix the supply voltage into REFIND_C6. cut the 12V trace and wired it to TP4 (REF_PITCH1).
+  - Checked REF_PITCH1 with scope after rework to make sure it was stable still.
+  - After this tried several Vcc voltages and it's much improved, At 1000Hz @ 12V, 998 @ 12.25V and 1004 @ 11.75V. So about 6Hz over 0.5V. This is about 1.2% per Volt. That's way better than yesterday's test w/o this. Through test REF_PITCH1 was rock solid 9.727V (set from cal steps).
+
+Todo:
+ - Test CV to freq scaling more throughly.
+    - Done.
+ - Test freq/pwm shift and try the 'hysteresis' resistor R32.
+    - Done.
+ - Test with different supply voltages to see if the behavior is better.
+    - Done. It's about the same as v1.0 until I reworked REFIND_C6 supply.
+
+ - Tested the HF Track adjustment. At 10V CV the pot couldn't reach an adequate setting for 33488Hz.
+ - Decided to measure the voltage (and therefor current) of the HF Track pin. At 10V CV, the HF pin over the 20200k combined resistance, the voltage was 1.331V (also tested other CVs). So there's about 65uA out of the HF pin. Instead of risk a bunch of other issues, swapped the resistors but kept the overall resistance nearly the same.
+  - Removed both 5.1k R21/R23. R21 was changed to 10k, R23 was shorted. This put the trim pot in the area need to trim out the tracking error at 10V CV.
+  - Re-tested tracking from 0 to 10V CV. All good: https://docs.google.com/spreadsheets/d/1qfa5OgiflcCrpyueND8rxWKN7h0p5OLnycMwUe4vgko/edit?usp=sharing
+
+Todo:
+ - Haven't done all these reworks on DUT2 yet.
+ - Update BOM.
+
+
+
+
+
+
+
+
