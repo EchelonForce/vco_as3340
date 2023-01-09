@@ -162,7 +162,7 @@ Test Notes 2023-01-08:
   - Checked REF_PITCH1 with scope after rework to make sure it was stable still.
   - After this tried several Vcc voltages and it's much improved, At 1000Hz @ 12V, 998 @ 12.25V and 1004 @ 11.75V. So about 6Hz over 0.5V. This is about 1.2% per Volt. That's way better than yesterday's test w/o this. Through test REF_PITCH1 was rock solid 9.727V (set from cal steps).
 
-Todo:
+Old Todos:
  - Test CV to freq scaling more throughly.
     - Done.
  - Test freq/pwm shift and try the 'hysteresis' resistor R32.
@@ -174,15 +174,10 @@ Todo:
  - Decided to measure the voltage (and therefor current) of the HF Track pin. At 10V CV, the HF pin over the 20200k combined resistance, the voltage was 1.331V (also tested other CVs). So there's about 65uA out of the HF pin. Instead of risk a bunch of other issues, swapped the resistors but kept the overall resistance nearly the same.
   - Removed both 5.1k R21/R23. R21 was changed to 10k, R23 was shorted. This put the trim pot in the area need to trim out the tracking error at 10V CV.
   - Re-tested tracking from 0 to 10V CV. All good: https://docs.google.com/spreadsheets/d/1qfa5OgiflcCrpyueND8rxWKN7h0p5OLnycMwUe4vgko/edit?usp=sharing
-
-Todo:
- - Haven't done all these reworks on DUT2 yet.
- - Update BOM.
+ - Did all reworks to DUT2 and calibrated it. Seems okay.
 
 
-
-
-
-
-
-
+Test Notes 2023-01-09:
+ - Checked Sync input. Seems okay on hard sync. Requires hard edges like VCO pulse, soft edges don't work. 
+    - Switch is not really useful with REF_VOLT and JP5. Added JP1 so that switch can function as a sync enable/disable.
+ - Updated PCB and Schematic with all changes in redlined pdf of v2.
