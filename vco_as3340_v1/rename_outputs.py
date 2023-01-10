@@ -49,7 +49,7 @@ def rename(folder, input_name, output_name):
             myzip.write(output_name + out_ext)
 
 folder = ".\panelized_outputs"
-input_name = "vco_as3340_v2_panelized"
-output_name = "vco_as3340_v2_panelized"
+input_name = "vco_as3340_v2_1_panelized"
+output_name = "vco_as3340_v2_1_panelized"
 
 rename(folder, input_name, output_name)
