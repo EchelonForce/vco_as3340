@@ -1,0 +1,51 @@
+
+Kicad:
+Open the PCB and export as .step.
+
+FreeCAD:
+Copy the template.
+Set hp and pcb size in dims spreadsheet
+Import .step of pcb from kicad.
+Align pcb model with pcb in sketch.
+Add holes for jacks etc.
+Switch to tech draw workbench. 
+Select 'TOP' view of part.
+Add part to drawing.
+Export as ...no_engraving.dxf (with only part shown, no dims).
+
+Inkcape:
+Open .svg template in Inkscape.
+Pamel Layer:
+  Import the .dxf of the the panel on a layer.
+  Change the line stroke to .1 mm
+  Scale the .dxf to the nominal panel size, importing screws this up.
+  Adjust the page size to the nominal panel size.
+Logo Layer:
+  Import the Logo\BLEEP_BLOOP_LOGO.svg
+  Change the line stroke to .1 mm
+Text Layer:
+  Add text converting to HersheyText.
+   - RobotDialogs
+   - Module Name
+   - Jack and Pot Labels
+   - Voltage Labels
+  Change the line stroke to .1 mm
+  Remember clearance for nuts/knobs.
+Other Layers:
+ - As needed.
+Save as ...engraving.dxf (AutoCAD DXF R14).
+
+Optional, to double check/render.
+FreeCAD:
+ - Switch to Draft workbench, turn off the grid (last button on toolbar 'Toggle Draft Grid').
+ - Import the engraving dxf.
+ - Select all the bits that were imported and select 'Convert draft object to sketch'.
+ - Delete the draft objects.
+ - Move the sketch +2mm in Z.
+
+Final Checks:
+Check text positions, remember clearance for nuts/knobs.
+Check that jack/knob names match PCB.
+Check for Logo
+Check for Voltage labels
+Check for missing LED hole.
