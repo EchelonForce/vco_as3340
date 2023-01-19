@@ -3127,7 +3127,7 @@
       (reference "R39") (unit 1) (value "100k") (footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder")
     )
     (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/1d375a87-d997-4000-bbb0-379db3c4785d"
-      (reference "R40") (unit 1) (value "2.5k") (footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder")
+      (reference "R40") (unit 1) (value "2.4k") (footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder")
     )
     (path "/86ba98da-2c50-4ba6-afff-98374a596d3c/6bae8bc6-d5d3-4ca5-9f4e-239420685bba"
       (reference "R41") (unit 1) (value "0") (footprint "Resistor_SMD:R_1206_3216Metric_Pad1.30x1.75mm_HandSolder")
